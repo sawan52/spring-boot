@@ -28,6 +28,7 @@ class SpringdatajpaApplicationTests {
 		product.setDescription("awesome");
 		product.setPrice(1200d);
 
+		/*
 		repo.save(product);
 
 		// read one data from database
@@ -46,6 +47,11 @@ class SpringdatajpaApplicationTests {
 			System.out.print("Product Name: " + prod.getName());
 			System.out.println(" Product Price: " + prod.getPrice());
 		});
+		*/
+		
+		System.out.println(repo.findByName("Mac"));
+		System.out.println(repo.findByPrice(1499d));
+		System.out.println(repo.findByNameAndPrice("Iphone", 799d));
 
 	}
 
