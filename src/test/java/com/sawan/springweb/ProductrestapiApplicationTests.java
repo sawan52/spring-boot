@@ -1,6 +1,7 @@
 package com.sawan.springweb;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,10 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class ProductrestapiApplicationTests {
 
+	@Value("${studentapi.services.url}")
+	String baseURL;
+
 	@Test
 	void testGetProduct() {
 		RestTemplate restTemplate = new RestTemplate();
-		Product product = restTemplate.getForObject("http://localhost:8080/studentapi/products/1", Product.class);
+		Product product = restTemplate.getForObject(baseURL + "/1", Product.class);
 
 		assertNotNull(product);
 		assertEquals("IPhone", product.getName());
@@ -29,8 +33,7 @@ class ProductrestapiApplicationTests {
 		product.setDescription("It is cheaper");
 		product.setPrice(229);
 
-		Product newProduct = restTemplate.postForObject("http://localhost:8080/studentapi/products", product,
-				Product.class);
+		Product newProduct = restTemplate.postForObject(baseURL, product, Product.class);
 		assertNotNull(newProduct);
 		assertNotNull(newProduct.getId());
 		assertEquals("Redmi Y1", newProduct.getName());
@@ -40,10 +43,10 @@ class ProductrestapiApplicationTests {
 	void testUpdateProduct() {
 		RestTemplate restTemplate = new RestTemplate();
 		// first we will get the product and then we will update it
-		Product product = restTemplate.getForObject("http://localhost:8080/studentapi/products/1", Product.class);
+		Product product = restTemplate.getForObject(baseURL + "/1", Product.class);
 
 		product.setPrice(1299);
-		restTemplate.put("http://localhost:8080/studentapi/products", product);
+		restTemplate.put(baseURL, product);
 	}
 
 }
