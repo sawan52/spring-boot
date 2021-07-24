@@ -17,6 +17,8 @@ class ProductrestapiApplicationTests {
 
 	@Test
 	void testGetProduct() {
+		System.out.println(baseURL);
+		
 		RestTemplate restTemplate = new RestTemplate();
 		Product product = restTemplate.getForObject(baseURL + "/1", Product.class);
 
