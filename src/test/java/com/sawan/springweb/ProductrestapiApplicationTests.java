@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class ProductrestapiApplicationTests {
 
-	@Value("${studentapi.services.url}")
+	@Value("${productrestapi.services.url}")
 	String baseURL;
 
 	@Test
 	void testGetProduct() {
 		System.out.println(baseURL);
-		
+
 		RestTemplate restTemplate = new RestTemplate();
 		Product product = restTemplate.getForObject(baseURL + "/1", Product.class);
 
